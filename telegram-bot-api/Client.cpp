@@ -4553,6 +4553,9 @@ class Client::JsonChatMember final : public td::Jsonable {
         UNREACHABLE();
     }
     object("status", Client::get_chat_member_status(member_->status_));
+    if (member_->joined_chat_date_ > 0) {
+      object("joined_chat_date", member_->joined_chat_date_);
+    }
     switch (member_->status_->get_id()) {
       case td_api::chatMemberStatusCreator::ID: {
         auto creator = static_cast<const td_api::chatMemberStatusCreator *>(member_->status_.get());
